@@ -1,5 +1,6 @@
 "use client";
 
+import TabBar from "@/components/tabBar";
 import { uploadEmployeesFile } from "@/network/upload.api";
 import { ChangeEvent, useState } from "react";
 
@@ -22,25 +23,46 @@ export default function HomePage() {
 
     const formData = new FormData();
     formData.append("file", file);
-
-    console.log("FORM DATA", formData);
     const response = await uploadEmployeesFile(formData);
     console.log(response);
   };
+
+  const tabOptions = {
+    tabBarOptions: [
+      {
+        tabName: "Uploads",
+        content: <div />,
+      },
+      {
+        tabName: "Generated Salary Slips",
+        content: <div />,
+      },
+      {
+        tabName: "Logs",
+        content: <div />,
+      },
+    ],
+  };
+
   return (
     <div>
       <div className="flex justify-end mr-4">
-        <label htmlFor="file-upload" className="cursor-pointer">
-          <button>Upload Employee Information</button>
+        <div className="relative inline-block">
+          <label htmlFor="file-upload" className="cursor-pointer">
+            <button className="relative">
+              {file ? file.name : "Upload Excel"}
+            </button>
+          </label>
           <input
-            className="hidden"
             id="file-upload"
             type="file"
-            accept=".xlsx, .xls"
             onChange={handleFileChange}
+            accept=".xlsx, .xls"
+            className="absolute inset-0 opacity-0 cursor-pointer"
           />
-        </label>
+        </div>
       </div>
+      <TabBar tabBarOptions={tabOptions.tabBarOptions} />
     </div>
   );
 }
