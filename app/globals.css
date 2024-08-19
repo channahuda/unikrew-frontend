@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  h1 {
+    @apply text-base font-bold;
+  }
+  button {
+    @apply outline-none active:outline-none focus:outline-none text-sm rounded-lg bg-black text-white px-3 py-2;
+  }
+}
