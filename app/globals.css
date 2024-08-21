@@ -4,9 +4,24 @@
 
 @layer utilities {
   h1 {
-    @apply text-base font-bold;
+    @apply text-lg font-bold;
   }
   button {
-    @apply outline-none active:outline-none focus:outline-none text-sm rounded-lg bg-black text-white px-3 py-2;
+    @apply outline-none active:outline-none focus:outline-none text-sm rounded-lg bg-black text-white;
+  }
+  h2 {
+    @apply text-base font-bold;
+  }
+  p {
+    @apply text-sm;
+  }
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }

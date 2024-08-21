@@ -5,6 +5,23 @@ export interface ApiHelperProps {
   contentType?: string;
 }
 
-export interface UploadEmployeeFileProps {
-  file: File;
+export interface SalaryProps {
+  _id: string;
+  email: string;
+  month: number;
+  basicSalary: number;
+  transportAllowance: number;
+  medicalAllowance: number;
+  taxDeduction: number;
+}
+
+export interface SalaryListProps {
+  salaries: SalaryProps[];
+}
+
+export interface EmployeeProps {
+  _id: string;
+  name: string;
+  email: string;
+  designation: string;
 }

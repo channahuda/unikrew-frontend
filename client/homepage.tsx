@@ -1,11 +1,20 @@
 "use client";
 
+import Loading from "@/components/loading";
+import SalaryList from "@/components/salary/salaryList";
 import TabBar from "@/components/tabBar";
+import { getSalaries } from "@/network/salary.api";
 import { uploadEmployeesFile } from "@/network/upload.api";
-import { ChangeEvent, useState } from "react";
+import { SalaryProps } from "@/utils/interfaces";
+import { ChangeEvent, useEffect, useState } from "react";
 
 export default function HomePage() {
   const [file, setFile] = useState<File | null>(null);
+  const [salaries, setSalaries] = useState<SalaryProps[]>([]);
+
+  useEffect(() => {
+    getAllSalaries();
+  }, []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -27,6 +36,11 @@ export default function HomePage() {
     console.log(response);
   };
 
+  const getAllSalaries = async () => {
+    const response = await getSalaries();
+    setSalaries(response);
+  };
+
   const tabOptions = {
     tabBarOptions: [
       {
@@ -35,7 +49,7 @@ export default function HomePage() {
       },
       {
         tabName: "Generated Salary Slips",
-        content: <div />,
+        content: <SalaryList salaries={salaries} />,
       },
       {
         tabName: "Logs",
@@ -44,12 +58,14 @@ export default function HomePage() {
     ],
   };
 
+  if (!salaries) return <Loading />;
+
   return (
     <div>
       <div className="flex justify-end mr-4">
         <div className="relative inline-block">
           <label htmlFor="file-upload" className="cursor-pointer">
-            <button className="relative">
+            <button className="relative px-3 py-2">
               {file ? file.name : "Upload Excel"}
             </button>
           </label>
