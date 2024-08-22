@@ -21,46 +21,6 @@ const SalarySlipPopup: React.FC<Props> = (props) => {
   const [totalNetPayable, setTotalNetPayable] = useState<number>();
   const contentRef = useRef<HTMLDivElement | null>(null);
 
-  // const handleDownload = async () => {
-  //   const element = contentRef.current;
-
-  //   if (!element) {
-  //     console.error("Element not found");
-  //     return;
-  //   }
-
-  //   // Capture the entire content, including any overflow, using a higher scale
-  //   const canvas = await html2canvas(element, {
-  //     scale: 6, // Increase scale to improve quality
-  //     useCORS: true,
-  //     scrollX: 0, // Ensure no scrolling affects the capture
-  //     scrollY: 0,
-  //     x: 0, // Capture from the top-left corner
-  //     y: 0,
-  //     width: element.scrollWidth, // Use full element width
-  //     height: element.scrollHeight, // Use full element height
-  //     windowWidth: element.scrollWidth, // Set window width to element width
-  //     windowHeight: element.scrollHeight, // Set window height to element height
-  //   });
-
-  //   const imgData = canvas.toDataURL("image/png");
-
-  //   const pdfWidth = canvas.width;
-  //   const pdfHeight = canvas.height;
-
-  //   const pdf = new jsPDF({
-  //     orientation: "portrait",
-  //     unit: "px",
-  //     format: [pdfWidth, pdfHeight],
-  //   });
-
-  //   // Add the captured image to the PDF
-  //   pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-  //   // Save the PDF
-  //   pdf.save("salary_slip.pdf");
-  // };
-
   const handleDownload = () => {
     if (contentRef.current === null) {
       return;
@@ -139,7 +99,9 @@ const SalarySlipPopup: React.FC<Props> = (props) => {
                 x
               </button>
             </div>
-            <Loading />
+            <div className="p-3 text-base items-center overflow-auto no-scrollbar max-h-[85vh] w-[90vh]">
+              <Loading />
+            </div>
           </div>
         </div>
       </div>

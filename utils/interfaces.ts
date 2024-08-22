@@ -25,3 +25,9 @@ export interface EmployeeProps {
   email: string;
   designation: string;
 }
+
+export interface LogProps {
+  _id: string;
+  date: Date;
+  message: string;
+}

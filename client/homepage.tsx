@@ -1,8 +1,10 @@
 "use client";
 
 import Loading from "@/components/loading";
+import Logs from "@/components/logs";
 import SalaryList from "@/components/salary/salaryList";
 import TabBar from "@/components/tabBar";
+import Uploads from "@/components/uploads";
 import { getSalaries } from "@/network/salary.api";
 import { uploadEmployeesFile } from "@/network/upload.api";
 import { SalaryProps } from "@/utils/interfaces";
@@ -44,16 +46,16 @@ export default function HomePage() {
   const tabOptions = {
     tabBarOptions: [
       {
-        tabName: "Uploads",
-        content: <div />,
-      },
-      {
         tabName: "Generated Salary Slips",
         content: <SalaryList salaries={salaries} />,
       },
       {
+        tabName: "Uploads",
+        content: <Uploads />,
+      },
+      {
         tabName: "Logs",
-        content: <div />,
+        content: <Logs />,
       },
     ],
   };
