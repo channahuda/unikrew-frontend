@@ -9,6 +9,7 @@ import { getSalaries } from "@/network/salary.api";
 import { uploadEmployeesFile } from "@/network/upload.api";
 import { SalaryProps } from "@/utils/interfaces";
 import { ChangeEvent, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function HomePage() {
   const [file, setFile] = useState<File | null>(null);
@@ -34,8 +35,14 @@ export default function HomePage() {
 
     const formData = new FormData();
     formData.append("file", file);
-    const response = await uploadEmployeesFile(formData);
-    console.log(response);
+    try {
+      const response = await uploadEmployeesFile(formData);
+      toast.success("File uploaded");
+      console.log(response);
+    } catch (error) {
+      toast.error("Could not uplosad file");
+      console.log(error);
+    }
   };
 
   const getAllSalaries = async () => {
